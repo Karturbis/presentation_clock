@@ -33,6 +33,8 @@ pygame.init()
 pygame.font.init()
 pygame.display.init()
 clock = pygame.time.Clock()
+icon = pygame.image.load("icon.png")
+pygame.display.set_icon(icon)
 
 # Initialize fonts:
 font = pygame.font.Font("freesansbold.ttf", 200)
