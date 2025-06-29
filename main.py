@@ -23,6 +23,8 @@ WARNING_TIME_SEC = 560
 CRITICAL_TIME_SEC = 585
 TIME_OVER_SEC = 600
 FPS = 60
+TIME_JUMP_SMALL = 10
+TIME_JUMP_BIG = 30
 SCREEN = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("Presentation Timer")
 
@@ -73,17 +75,27 @@ def main():
                 pygame.QUIT
                 exit(0)
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_q:
+                    pygame.QUIT
+                    exit(0)
+                elif event.key == pygame.K_SPACE:
                     if not running:
                         start_time = int(time.time())-end_time+start_time # round, so both clocks update at the same time
                         running = True
                     else:
                         running = False
                         end_time = int(time.time())
-                        print(end_time)
                 elif event.key == pygame.K_r:
                     start_time = int(time.time())
                     end_time = int(time.time())
+                elif event.key == pygame.K_LEFT or event.key == pygame.K_DOWN:
+                    start_time += TIME_JUMP_BIG
+                    if int(time.time())-start_time < 0:
+                        start_time = int(time.time())
+                    if int(end_time-start_time) < 0:
+                        start_time = end_time
+                elif event.key == pygame.K_RIGHT or event.key == pygame.K_UP:
+                    start_time -= TIME_JUMP_BIG
         delta_time = time.time()-start_time
         if running and delta_time >= TIME_OVER_SEC:
             bg_color = BG_COLOR_TIME_OVER
