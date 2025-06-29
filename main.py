@@ -19,9 +19,9 @@ FG_COLOR_TIME_OVER = "black"
 # 9.5 min = 570s
 # 10 min = 600s
 # 15 min = 900s
-WARNING_TIME_SEC = 15
-CRITICAL_TIME_SEC = 30
-TIME_OVER_SEC = 45
+WARNING_TIME_SEC = 560
+CRITICAL_TIME_SEC = 585
+TIME_OVER_SEC = 600
 FPS = 60
 SCREEN = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("Presentation Timer")
@@ -83,6 +83,7 @@ def main():
                         print(end_time)
                 elif event.key == pygame.K_r:
                     start_time = int(time.time())
+                    end_time = int(time.time())
         delta_time = time.time()-start_time
         if running and delta_time >= TIME_OVER_SEC:
             bg_color = BG_COLOR_TIME_OVER
