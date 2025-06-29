@@ -92,7 +92,7 @@ def main():
                     start_time += TIME_JUMP_BIG
                     if int(time.time())-start_time < 0:
                         start_time = int(time.time())
-                    if int(end_time-start_time) < 0:
+                    if int(end_time-start_time) < 0 and not running:
                         start_time = end_time
                 elif event.key == pygame.K_RIGHT or event.key == pygame.K_UP:
                     start_time -= TIME_JUMP_BIG
